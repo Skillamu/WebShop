@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WebShop
+namespace WebShopNS
 {
     internal class StoreInventory
     {
@@ -25,10 +25,25 @@ namespace WebShop
             gameItem is IPhysicalCopy).ToList();
         }
 
-        public List<GameItem> ListDigitalItems()
+        public List<GameItem> ListDownloadableItems()
         {
             return InventoryList.Where(gameItem =>
-            gameItem is IDigitalCopy).ToList();
+            gameItem is IDownloadable).ToList();
+        }
+
+        public void Print(List<GameItem> list)
+        {
+            foreach (var item in list)
+            {
+                item.PrintGameNameAndPrice();
+            }
+        }
+
+        public void PrintInventory(string cmd)
+        {
+            if (cmd == "1") Print(InventoryList);
+            else if (cmd == "2") Print(ListPhysicalItems());
+            else Print(ListDownloadableItems());
         }
     }
 }

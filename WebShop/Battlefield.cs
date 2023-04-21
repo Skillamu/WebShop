@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WebShop
+namespace WebShopNS
 {
-    internal class Battlefield : GameItem, IDigitalCopy
+    internal class Battlefield : GameItem, IDownloadable
     {
         public Battlefield(int price, string gameName, int id)
             : base(price, gameName, id)

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WebShop
+namespace WebShopNS
 {
-    internal class GameItem
+    internal abstract class GameItem
     {
         public int Price { get; set; }
         public string GameName { get; set; }
@@ -17,6 +17,11 @@ namespace WebShop
             Price = price;
             GameName = gameName;
             Id = id;
+        }
+
+        public void PrintGameNameAndPrice()
+        {
+            Console.WriteLine($"ID: {Id}, {GameName}, pris: {Price}kr");
         }
     }
 }
