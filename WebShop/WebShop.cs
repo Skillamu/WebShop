@@ -29,9 +29,8 @@ namespace WebShopNS
         {
             var listToPrint = AskForListToPrint();
             _storeInventory.PrintList(listToPrint);
-            Console.WriteLine("Enter the ID of the game you want to buy");
+            Console.WriteLine("\nEnter the ID of the game you want to buy");
             var gameToBuy = AskForGameId();
-            // Will add shopping cart list later.
             var processToHandle = GetProcessToRecieveTheGame(gameToBuy);
             HandleProcess(processToHandle);
 
@@ -40,23 +39,19 @@ namespace WebShopNS
 
         private string GetProcessToRecieveTheGame(GameItem gameToBuy)
         {
-            string processToHandle;
-
             if (IsShippable(gameToBuy) && IsDownloadable(gameToBuy))
             {
-                processToHandle = ChooseProcessToRecieveTheGame();
+                return ChooseProcessToRecieveTheGame();
             }
-            else if (IsShippable(gameToBuy)) processToHandle = "ship";
-            else processToHandle = "download";
-
-            return processToHandle;
+            else if (IsShippable(gameToBuy)) return "ship";
+            else return "download";
         }
 
         private string ChooseProcessToRecieveTheGame()
         {
-            Console.WriteLine("Do you want to ship or download the game?");
-            Console.WriteLine("Enter \"s\" to have the game shipped.");
-            Console.WriteLine("Enter \"d\" to have the game downloaded.");
+            Console.WriteLine("\nDo you want to ship or download the game?");
+            Console.WriteLine("Enter \"s\" to have the game shipped");
+            Console.WriteLine("Enter \"d\" to have the game downloaded");
             while (true)
             {
                 var processToHandle = Console.ReadKey(true).KeyChar.ToString();
@@ -66,8 +61,7 @@ namespace WebShopNS
                 }
             }
         }
-        // Bug to fix: After a list is chosen, make it only
-        // possible to search for id's in that chosen list.
+
         private void HandleProcess(string processToHandle)
         {
             if (processToHandle == "ship") PrintShippingMessage();
@@ -79,7 +73,7 @@ namespace WebShopNS
             while (true)
             {
                 var gameId = Console.ReadKey(true).KeyChar.ToString();
-                var gameToBuy = _storeInventory.FindGameById(gameId);
+                var gameToBuy = _storeInventory.FindGameByIdInCurrentList(gameId);
                 if (gameToBuy != null) return gameToBuy;
             }
         }
@@ -94,9 +88,9 @@ namespace WebShopNS
             => gameToBuy is IDownloadable? true : false;
 
         private void PrintShippingMessage()
-            => Console.WriteLine($"Game will be shipped shortly...");
+            => Console.WriteLine($"\nGame will be shipped shortly...");
 
         private void PrintDownloadMessage()
-            => Console.WriteLine($"Game will now be downloaded...");
+            => Console.WriteLine($"\nGame will now be downloaded...");
     }
 }
