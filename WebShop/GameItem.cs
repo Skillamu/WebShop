@@ -8,11 +8,11 @@ namespace WebShopNS
 {
     internal abstract class GameItem
     {
-        public int Price { get; set; }
-        public string GameName { get; set; }
-        public int Id { get; set; }
+        public int Price { get; }
+        public string GameName { get; }
+        public string Id { get; }
 
-        public GameItem(int price, string gameName, int id)
+        protected GameItem(int price, string gameName, string id)
         {
             Price = price;
             GameName = gameName;

@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace WebShopNS
 {
-    internal class Cyberpunk : GameItem, IDownloadable, IPhysicalCopy
+    internal class PUBG : GameItem, IPhysicalCopy, IDownloadable
     {
-        public Cyberpunk(int price, string gameName, string id)
+        public PUBG(int price, string gameName, string id)
             : base(price, gameName, id)
         {
         }

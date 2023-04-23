@@ -8,10 +8,9 @@ namespace WebShopNS
 {
     internal class Battlefield : GameItem, IDownloadable
     {
-        public Battlefield(int price, string gameName, int id)
+        public Battlefield(int price, string gameName, string id)
             : base(price, gameName, id)
         {
-
         }
     }
 }

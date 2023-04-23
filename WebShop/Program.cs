@@ -6,8 +6,6 @@
         {
             var storeInventory = new StoreInventory();
             var webShop = new WebShop(storeInventory);
-
-            Console.ReadKey(true);
         }
     }
 }

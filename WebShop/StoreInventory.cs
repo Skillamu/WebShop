@@ -8,30 +8,35 @@ namespace WebShopNS
 {
     internal class StoreInventory
     {
-        public List<GameItem> InventoryList;
+        private List<GameItem> _inventory;
 
         public StoreInventory()
         {
-            InventoryList = new List<GameItem>
+            _inventory = new List<GameItem>
             {
-                new Battlefield(150, "Battlefield", 1),
-                new Cyberpunk(250, "Cyberpunk", 2),
+                new Battlefield(150, "Battlefield", "1"),
+                new Cyberpunk(250, "Cyberpunk", "2"),
+                new Pokemon(400, "Pokemon Let's GO Eevee", "3"),
+                new PUBG(100, "PUBG", "4"),
             };
         }
 
-        public List<GameItem> ListPhysicalItems()
+        public GameItem? FindGameById(string gameId)
+            => _inventory.Find(game => game.Id == gameId);
+
+        private List<GameItem> GetListOfPhysicalItems()
         {
-            return InventoryList.Where(gameItem =>
+            return _inventory.Where(gameItem =>
             gameItem is IPhysicalCopy).ToList();
         }
 
-        public List<GameItem> ListDownloadableItems()
+        private List<GameItem> GetListOfDownloadableItems()
         {
-            return InventoryList.Where(gameItem =>
+            return _inventory.Where(gameItem =>
             gameItem is IDownloadable).ToList();
         }
 
-        public void Print(List<GameItem> list)
+        private void Print(List<GameItem> list)
         {
             foreach (var item in list)
             {
@@ -39,11 +44,11 @@ namespace WebShopNS
             }
         }
 
-        public void PrintInventory(string cmd)
+        public void PrintList(string listToPrint)
         {
-            if (cmd == "1") Print(InventoryList);
-            else if (cmd == "2") Print(ListPhysicalItems());
-            else Print(ListDownloadableItems());
+            if (listToPrint == "1") Print(_inventory);
+            else if (listToPrint == "2") Print(GetListOfPhysicalItems());
+            else Print(GetListOfDownloadableItems());
         }
     }
 }
